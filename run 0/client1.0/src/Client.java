@@ -16,20 +16,20 @@ public class Client {
         // or use it as a global variable; Final variables can't be changed later
         // Try to function it as an array
 
-        JFrame j_frame=new JFrame("Xchange 1.0 client");
+        JFrame j_frame=new JFrame("Xchange 1.0 Client");
         j_frame.setSize(500, 500); // 450 * 450
         j_frame.setLayout(new BoxLayout(j_frame.getContentPane(), BoxLayout.Y_AXIS));
         j_frame.setDefaultCloseOperation(j_frame.EXIT_ON_CLOSE);
 
-        JLabel j_1_title = new JLabel("XChange");
-        j_1_title.setFont(new Font("Arial", Font.BOLD, 25));
-        j_1_title.setBorder(new EmptyBorder(20, 0, 10, 0));
-        j_1_title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel j_l_title = new JLabel("XChange File Sender");
+        j_l_title.setFont(new Font("Arial", Font.BOLD, 25));
+        j_l_title.setBorder(new EmptyBorder(20, 0, 10, 0));
+        j_l_title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel j_1_filename = new JLabel(("Choose a file to send"));
-        j_1_filename.setFont(new Font("Arial", Font.BOLD, 20));
-        j_1_filename.setBorder(new EmptyBorder(40, 0, 10, 0));
-        j_1_filename.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel j_l_filename = new JLabel(("Choose a file to send"));
+        j_l_filename.setFont(new Font("Arial", Font.BOLD, 20));
+        j_l_filename.setBorder(new EmptyBorder(40, 0, 10, 0));
+        j_l_filename.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JPanel j_p_Button = new JPanel();
         j_p_Button.setBorder(new EmptyBorder(60, 0, 10, 0));
@@ -53,7 +53,7 @@ public class Client {
 
                 if(j_file_chooser.showOpenDialog(null) == j_file_chooser.APPROVE_OPTION){
                     file_to_send[0] = j_file_chooser.getSelectedFile();
-                    j_1_filename.setText("The File ypu want to send is: " + file_to_send[0].getName());
+                    j_l_filename.setText("The File ypu want to send is: " + file_to_send[0].getName());
                 }
             }
         });
@@ -62,7 +62,7 @@ public class Client {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(file_to_send[0]==null){
-                    j_1_filename.setText("Please, Choose a File First");
+                    j_l_filename.setText("Please, Choose a File First");
                 }else{
                     try {
                         FileInputStream file_input_stream = new FileInputStream(file_to_send[0].getAbsolutePath()); // File input stream allows access into the files
@@ -89,8 +89,8 @@ public class Client {
         });
 
         // Adding all components to the Frame to display the components
-        j_frame.add(j_1_title);
-        j_frame.add(j_1_filename);
+        j_frame.add(j_l_title);
+        j_frame.add(j_l_filename);
         j_frame.add(j_p_Button);
         j_frame.setVisible(true);
     }
