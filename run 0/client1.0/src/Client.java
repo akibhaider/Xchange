@@ -2,31 +2,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataOutputStream;
 import java.io.File;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 public class Client {
     public static void main(String[] args) {
         final File[] file_to_send = new File[1];
-        // A variable accessed within an inner class need to be declared as final
-        // or use it as a global variable; Final variables can't be changed later
-        // Try to function it as an array
 
-        JFrame j_frame=new JFrame("Xchange 1.0 Client");
-        j_frame.setSize(500, 500); // 450 * 450
+        JFrame j_frame = new JFrame("Xchange 1.0 Client");
+        j_frame.setSize(500, 500);
         j_frame.setLayout(new BoxLayout(j_frame.getContentPane(), BoxLayout.Y_AXIS));
-        j_frame.setDefaultCloseOperation(j_frame.EXIT_ON_CLOSE);
+        j_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel j_l_title = new JLabel("XChange File Sender");
         j_l_title.setFont(new Font("Arial", Font.BOLD, 25));
         j_l_title.setBorder(new EmptyBorder(20, 0, 10, 0));
         j_l_title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel j_l_filename = new JLabel(("Choose a file to send"));
+        JLabel j_l_filename = new JLabel("Choose a file to send");
         j_l_filename.setFont(new Font("Arial", Font.BOLD, 20));
         j_l_filename.setBorder(new EmptyBorder(40, 0, 10, 0));
         j_l_filename.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -51,9 +48,9 @@ public class Client {
                 JFileChooser j_file_chooser = new JFileChooser();
                 j_file_chooser.setDialogTitle("Choose a File to send");
 
-                if(j_file_chooser.showOpenDialog(null) == j_file_chooser.APPROVE_OPTION){
+                if (j_file_chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     file_to_send[0] = j_file_chooser.getSelectedFile();
-                    j_l_filename.setText("The File ypu want to send is: " + file_to_send[0].getName());
+                    j_l_filename.setText("The file you want to send is: " + file_to_send[0].getName());
                 }
             }
         });
@@ -61,39 +58,66 @@ public class Client {
         j_b_send_file.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(file_to_send[0]==null){
-                    j_l_filename.setText("Please, Choose a File First");
-                }else{
-                    try {
-                        FileInputStream file_input_stream = new FileInputStream(file_to_send[0].getAbsolutePath()); // File input stream allows access into the files
-                        String serverIpAddress = "192.168.0.20";
-                        int serverPort = 1234;
+                if (file_to_send[0] == null) {
+                    j_l_filename.setText("Please, choose a file first");
+                } else {
+                    JFrame progress_frame = new JFrame("Sending File");
+                    progress_frame.setSize(400, 150);
+                    JProgressBar j_progress_bar = new JProgressBar(0, (int) file_to_send[0].length());
+                    JLabel j_l_speed = new JLabel("Speed: 0 B/s");
+                    progress_frame.setLayout(new BoxLayout(progress_frame.getContentPane(), BoxLayout.Y_AXIS));
+                    progress_frame.add(j_progress_bar);
+                    progress_frame.add(j_l_speed);
+                    progress_frame.setVisible(true);
 
-                        System.out.println("Connecting to server at IP address: " + serverIpAddress);
-                        System.out.println("Connecting to server at port: " + serverPort);
-                        Socket socket = new Socket(serverIpAddress, serverPort); // Socket is the way to connect with the server, 1234 is a common port number
+                    new Thread(() -> {
+                        try {
+                            FileInputStream file_input_stream = new FileInputStream(file_to_send[0].getAbsolutePath());
+                            Socket socket = new Socket("127.0.0.1", 1234);
 
-                        DataOutputStream data_output_stream = new DataOutputStream(socket.getOutputStream()); // Data Output stream will allow to write into the server
+                            DataOutputStream data_output_stream = new DataOutputStream(socket.getOutputStream());
 
-                        String file_name = file_to_send[0].getName();
-                        byte[] file_name_byte = file_name.getBytes(); // Sending the file name in a byte array for transmission
+                            String file_name = file_to_send[0].getName();
+                            byte[] file_name_bytes = file_name.getBytes();
+                            byte[] file_content_bytes = new byte[(int) file_to_send[0].length()];
 
-                        byte[] file_content_bytes = new byte[(int) file_to_send[0].length()];
-                        file_input_stream.read(file_content_bytes); // read the contents of the byte format of file
+                            data_output_stream.writeInt(file_name_bytes.length);
+                            data_output_stream.write(file_name_bytes);
 
-                        data_output_stream.writeInt(file_name_byte.length); // Firstly, the length of the actual data file is sent (Specifying the length is important; otherwise stream will wait for content if not specified)
-                        data_output_stream.write(file_name_byte); // After that we'll send file_name byte information
+                            data_output_stream.writeInt(file_content_bytes.length);
 
-                        data_output_stream.writeInt(file_content_bytes.length);
-                        data_output_stream.write(file_content_bytes);
-                    } catch (IOException err){
-                        err.printStackTrace();
-                    }
+                            long startTime = System.currentTimeMillis();
+                            int bytesRead = 0;
+                            int read;
+                            byte[] buffer = new byte[4096];
+                            while ((read = file_input_stream.read(buffer)) != -1) {
+                                data_output_stream.write(buffer, 0, read);
+                                bytesRead += read;
+
+                                // Update progress bar on the Event Dispatch Thread
+                                final int currentBytesRead = bytesRead;
+                                SwingUtilities.invokeLater(() -> {
+                                    j_progress_bar.setValue(currentBytesRead);
+                                    long currentTime = System.currentTimeMillis();
+                                    double elapsedTime = (currentTime - startTime) / 1000.0; // seconds
+                                    double speed = (currentBytesRead / 1024.0) / elapsedTime; // KB per second
+                                    j_l_speed.setText(String.format("Speed: %.2f KB/s", speed));
+                                });
+                            }
+
+                            file_input_stream.close();
+                            data_output_stream.close();
+                            socket.close();
+                            progress_frame.dispose();
+
+                        } catch (IOException err) {
+                            err.printStackTrace();
+                        }
+                    }).start();
                 }
             }
         });
 
-        // Adding all components to the Frame to display the components
         j_frame.add(j_l_title);
         j_frame.add(j_l_filename);
         j_frame.add(j_p_Button);
