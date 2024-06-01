@@ -1,126 +1,160 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.Socket;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.*;
+import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executors;
 
 public class Client {
-    public static void main(String[] args) {
-        final File[] file_to_send = new File[1];
 
-        JFrame j_frame = new JFrame("Xchange 1.0 Client");
-        j_frame.setSize(500, 500);
-        j_frame.setLayout(new BoxLayout(j_frame.getContentPane(), BoxLayout.Y_AXIS));
-        j_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private String username;
+    private static final int BROADCAST_PORT = 8888;
+    private static final int SERVER_PORT = 9999;
+    private static final String MULTICAST_ADDRESS = "230.0.0.0";
+    private String serverAddress;
+    public String address;
 
-        JLabel j_l_title = new JLabel("XChange File Sender");
-        j_l_title.setFont(new Font("Arial", Font.BOLD, 25));
-        j_l_title.setBorder(new EmptyBorder(20, 0, 10, 0));
-        j_l_title.setAlignmentX(Component.CENTER_ALIGNMENT);
+    private JFrame frame;
+    private DefaultListModel<String> serverListModel;
+    private List<String> serverAddresses;
+    private JButton disconnectButton;
+    private JButton sendButton;
+    private MulticastSocket multicastSocket;
 
-        JLabel j_l_filename = new JLabel("Choose a file to send");
-        j_l_filename.setFont(new Font("Arial", Font.BOLD, 20));
-        j_l_filename.setBorder(new EmptyBorder(40, 0, 10, 0));
-        j_l_filename.setAlignmentX(Component.CENTER_ALIGNMENT);
+    public Client(String username) {
+        this.username = username;
+    }
 
-        JPanel j_p_Button = new JPanel();
-        j_p_Button.setBorder(new EmptyBorder(60, 0, 10, 0));
+    public void startClient() {
+        frame = new JFrame("Client - " + username);
+        serverListModel = new DefaultListModel<>();
+        serverAddresses = new ArrayList<>();
+        disconnectButton = new JButton("Disconnect");
+        disconnectButton.setEnabled(false);
+        sendButton = new JButton("Send");
+        sendButton.setEnabled(false);
 
-        JButton j_b_send_file = new JButton("Send File");
-        j_b_send_file.setPreferredSize(new Dimension(150, 75));
-        j_b_send_file.setFont(new Font("Arial", Font.BOLD, 20));
+        JLabel usernameLabel = new JLabel("Username: " + username);
+        JList<String> serverList = new JList<>(serverListModel);
+        JButton connectButton = new JButton("Connect");
+        JButton backButton = new JButton("Back");
 
-        JButton j_b_choose_file = new JButton("Choose File");
-        j_b_choose_file.setPreferredSize(new Dimension(150, 75));
-        j_b_choose_file.setFont(new Font("Arial", Font.BOLD, 20));
+        connectButton.addActionListener(this::connectToSelectedServer);
+        backButton.addActionListener(e -> {
+            int response = JOptionPane.showConfirmDialog(frame,
+                    "Connection will be terminated. Are you sure you want to go to the mainframe?",
+                    "Warning",
+                    JOptionPane.YES_NO_OPTION);
 
-        j_p_Button.add(j_b_send_file);
-        j_p_Button.add(j_b_choose_file);
-
-        j_b_choose_file.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser j_file_chooser = new JFileChooser();
-                j_file_chooser.setDialogTitle("Choose a File to send");
-
-                if (j_file_chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    file_to_send[0] = j_file_chooser.getSelectedFile();
-                    j_l_filename.setText("The file you want to send is: " + file_to_send[0].getName());
-                }
+            if (response == JOptionPane.YES_OPTION) {
+                frame.dispose();
+                disconnect();
+                new MainFrame().showMainFrame();
             }
         });
 
-        j_b_send_file.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (file_to_send[0] == null) {
-                    j_l_filename.setText("Please, choose a file first");
-                } else {
-                    JFrame progress_frame = new JFrame("Sending File");
-                    progress_frame.setSize(400, 150);
-                    JProgressBar j_progress_bar = new JProgressBar(0, (int) file_to_send[0].length());
-                    JLabel j_l_speed = new JLabel("Speed: 0 B/s");
-                    progress_frame.setLayout(new BoxLayout(progress_frame.getContentPane(), BoxLayout.Y_AXIS));
-                    progress_frame.add(j_progress_bar);
-                    progress_frame.add(j_l_speed);
-                    progress_frame.setVisible(true);
+        disconnectButton.addActionListener(e -> disconnect());
 
-                    new Thread(() -> {
-                        try {
-                            FileInputStream file_input_stream = new FileInputStream(file_to_send[0].getAbsolutePath());
-                            Socket socket = new Socket("127.0.0.1", 1234);
+        sendButton.addActionListener(e -> sends());
 
-                            DataOutputStream data_output_stream = new DataOutputStream(socket.getOutputStream());
+        JPanel buttonPanel = new JPanel(new BorderLayout());
+        JPanel buttonPanel2 = new JPanel(new BorderLayout());
+        buttonPanel.add(connectButton, BorderLayout.WEST);
+        buttonPanel.add(disconnectButton, BorderLayout.CENTER);
+        buttonPanel2.add(sendButton, BorderLayout.CENTER);
+        buttonPanel.add(backButton, BorderLayout.EAST);
 
-                            String file_name = file_to_send[0].getName();
-                            byte[] file_name_bytes = file_name.getBytes();
-                            byte[] file_content_bytes = new byte[(int) file_to_send[0].length()];
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+        frame.add(usernameLabel, BorderLayout.NORTH);
+        frame.add(new JScrollPane(serverList), BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
+        frame.add(buttonPanel2, BorderLayout.SOUTH);
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
 
-                            data_output_stream.writeInt(file_name_bytes.length);
-                            data_output_stream.write(file_name_bytes);
+        Executors.newSingleThreadExecutor().execute(this::discoverServers);
+    }
 
-                            data_output_stream.writeInt(file_content_bytes.length);
+    private void discoverServers() {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                multicastSocket = new MulticastSocket(BROADCAST_PORT);
+                InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
+                multicastSocket.joinGroup(group);
 
-                            long startTime = System.currentTimeMillis();
-                            int bytesRead = 0;
-                            int read;
-                            byte[] buffer = new byte[4096];
-                            while ((read = file_input_stream.read(buffer)) != -1) {
-                                data_output_stream.write(buffer, 0, read);
-                                bytesRead += read;
+                byte[] buf = new byte[256];
+                while (true) {
+                    DatagramPacket packet = new DatagramPacket(buf, buf.length);
+                    try {
+                        multicastSocket.receive(packet);
+                    } catch (SocketException e) {
+                        // Socket closed, exit loop
+                        break;
+                    }
+                    String serverName = new String(packet.getData(), 0, packet.getLength());
+                    serverAddress = packet.getAddress().getHostAddress();
 
-                                // Update progress bar on the Event Dispatch Thread
-                                final int currentBytesRead = bytesRead;
-                                SwingUtilities.invokeLater(() -> {
-                                    j_progress_bar.setValue(currentBytesRead);
-                                    long currentTime = System.currentTimeMillis();
-                                    double elapsedTime = (currentTime - startTime) / 1000.0; // seconds
-                                    double speed = (currentBytesRead / 1024.0) / elapsedTime; // KB per second
-                                    j_l_speed.setText(String.format("Speed: %.2f KB/s", speed));
-                                });
-                            }
-
-                            file_input_stream.close();
-                            data_output_stream.close();
-                            socket.close();
-                            progress_frame.dispose();
-
-                        } catch (IOException err) {
-                            err.printStackTrace();
-                        }
-                    }).start();
+                    // Skip own server broadcasts and already discovered servers
+                    if (!serverAddresses.contains(serverAddress) && !serverAddress.equals(InetAddress.getLocalHost().getHostAddress())) {
+                        serverAddresses.add(serverAddress);
+                        serverListModel.addElement(serverName + " (" + serverAddress + ")");
+                    }
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
+    }
 
-        j_frame.add(j_l_title);
-        j_frame.add(j_l_filename);
-        j_frame.add(j_p_Button);
-        j_frame.setVisible(true);
+    private void connectToSelectedServer(ActionEvent event) {
+        int selectedIndex = ((JList<String>) ((JScrollPane) frame.getContentPane().getComponent(1)).getViewport().getView()).getSelectedIndex();
+        if (selectedIndex >= 0) {
+            String selectedServer = serverAddresses.get(selectedIndex);
+            Executors.newSingleThreadExecutor().execute(() -> sendConnectionRequest(selectedServer));
+        }
+    }
+
+    private void sendConnectionRequest(String serverAddress) {
+        try (Socket socket = new Socket(serverAddress, SERVER_PORT);
+             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+
+            out.println(username);
+            String response = in.readLine();
+            JOptionPane.showMessageDialog(frame, response);
+            disconnectButton.setEnabled(true);
+            sendButton.setEnabled(true);
+
+            address = serverAddress;
+
+            System.out.println(serverAddress);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void disconnect() {
+        if (multicastSocket != null) {
+            try {
+                InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
+                multicastSocket.leaveGroup(group);
+                multicastSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        serverListModel.clear();
+        serverAddresses.clear();
+        disconnectButton.setEnabled(false);
+        discoverServers();
+    }
+
+    public void sends(){
+        Sender sender = new Sender(address);
+        frame.dispose();
+        sender.send();
     }
 }
