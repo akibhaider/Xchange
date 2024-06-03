@@ -19,10 +19,10 @@ vi.  FILE TYPE COMPATIBILITY: Files can be sent of multiple types such as, image
 -> Any Java IDE (e.g. Intellij Idea, Eclipse) is preferable.  
 
 **Steps**  
-# Download the zip file of the project (Network4.3) or clone the git repository.  
+1. Download the zip file of the project (Network4.3) or clone the git repository.  
   (bash script: `git clone <url of the repository>`)  
-# Open the folder in a workplace (any IDE or code editor) and make sure to do the initial setup  
-# Run the `MainFrame.java` file  
+2. Open the folder in a workplace (any IDE or code editor) and make sure to do the initial setup  
+3. Run the `MainFrame.java` file  
 
 **Scope**  
 => Multiple server can connect to multiple clients  
