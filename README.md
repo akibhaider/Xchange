@@ -22,7 +22,34 @@ vi.  FILE TYPE COMPATIBILITY: Files can be sent of multiple types such as, image
 1. Download the zip file of the project (Network4.3) or clone the git repository.  
   (bash script: `git clone <url of the repository>`)  
 2. Open the folder in a workplace (any IDE or code editor) and make sure to do the initial setup  
-3. Run the `MainFrame.java` file  
+3. Run the `MainFrame.java` file
+
+## Screenshot
+
+<p align="center">
+  <img src="Battleship_Destroyer_(2_player_strategic_game)/src/main/resources/Home_Window.png" alt="Main Menu" width="337"/>
+   <br/>
+  <em>Main Menu</em>
+   <br/>
+   <br/>
+  <img src="Battleship_Destroyer_(2_player_strategic_game)/src/main/resources/player_blue_planning.png" alt="Ship planning-i" width="337"/>
+   <br/>
+  <em>Ship planning-i</em>
+   <br/>
+</p>
+
+<p align="center">
+   <br/>
+  <img src="Battleship_Destroyer_(2_player_strategic_game)/src/main/resources/player_red_planning.png" alt="Ship planning-ii" width="337"/>
+   <br/>
+  <em>Ship planning-ii</em>
+   <br/>
+   <br/>
+  <img src="Battleship_Destroyer_(2_player_strategic_game)/src/main/resources/rumble.png" alt="Rumble on!" width="337"/>
+   <br/>
+  <em>Rumble on!</em>
+   <br/>
+</p>
 
 **Scope**  
 => Multiple server can connect to multiple clients  
