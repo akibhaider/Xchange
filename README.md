@@ -27,27 +27,21 @@ vi.  FILE TYPE COMPATIBILITY: Files can be sent of multiple types such as, image
 ## Screenshot
 
 <p align="center">
-  <img src="Battleship_Destroyer_(2_player_strategic_game)/src/main/resources/Home_Window.png" alt="Main Menu" width="337"/>
+  <img src="XChange_finale/source_img/XChange_main_menu.png" alt="Main Menu" width="337"/>
    <br/>
   <em>Main Menu</em>
    <br/>
    <br/>
-  <img src="Battleship_Destroyer_(2_player_strategic_game)/src/main/resources/player_blue_planning.png" alt="Ship planning-i" width="337"/>
+  <img src="XChange_finale/source_img/receiver.png" alt="Ship planning-i" width="337"/>
    <br/>
-  <em>Ship planning-i</em>
+  <em>File Receiving Window</em>
    <br/>
 </p>
-
 <p align="center">
    <br/>
-  <img src="Battleship_Destroyer_(2_player_strategic_game)/src/main/resources/player_red_planning.png" alt="Ship planning-ii" width="337"/>
+  <img src="XChange_finale/source_img/sender.png" alt="Ship planning-ii" width="337"/>
    <br/>
-  <em>Ship planning-ii</em>
-   <br/>
-   <br/>
-  <img src="Battleship_Destroyer_(2_player_strategic_game)/src/main/resources/rumble.png" alt="Rumble on!" width="337"/>
-   <br/>
-  <em>Rumble on!</em>
+  <em>File Sending Window</em>
    <br/>
 </p>
 
