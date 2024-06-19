@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/network 4.3 - origin.iml" filepath="$PROJECT_DIR$/network 4.3 - origin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/network.iml" filepath="$PROJECT_DIR$/network.iml" />
     </modules>
   </component>
 </project>
