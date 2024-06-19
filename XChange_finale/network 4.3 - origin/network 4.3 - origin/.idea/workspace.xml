@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c165f213-adb6-463b-8f5b-d0b1f77bda6a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../EEE-4483_5.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Screenshot (10).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Screenshot (3).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../network 4.3 - origin.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screenshot (10).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Screenshot (3).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network 4.3 - origin.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/network.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shinji-hirako.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/username.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../network.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shinji-hirako.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/MainFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/MyFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../username.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/Client$CustomCellRenderer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/MainFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/MyFile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/Sender$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/Sender$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/Sender$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/Sender.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/Server$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/Server$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/Server$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/network 4.3 - origin/Server.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../username.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../username.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2hI6tQZMFoPJk0sKFbVhYKe8873" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Client.executor": "Run",
+    "Application.MainFrame.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/Xchange/XChange_finale",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c165f213-adb6-463b-8f5b-d0b1f77bda6a" name="Changes" comment="" />
+      <created>1717269458717</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717269458717</updated>
+      <workItem from="1717269459810" duration="2149000" />
+      <workItem from="1717271882728" duration="19231000" />
+      <workItem from="1717334677501" duration="5000" />
+      <workItem from="1717334761231" duration="3950000" />
+      <workItem from="1717354540469" duration="1833000" />
+      <workItem from="1718819626207" duration="410000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
