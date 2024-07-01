@@ -11,7 +11,8 @@ import java.util.concurrent.Executors;
 
 public class Client {
 
-    private String username;
+    public String username;
+    // private String username;
     private static final int BROADCAST_PORT = 8888;
     private static final int SERVER_PORT = 9999;
     private static final String MULTICAST_ADDRESS = "230.0.0.0";
