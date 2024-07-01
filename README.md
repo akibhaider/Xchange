@@ -4,7 +4,7 @@
 XChange is a Java application that enables secure, fast and user-friendly file transfer between two devices connected on the same local network, eliminating the need for an internet connection.
 
 **Features**  
-i.   FILE TRANSFER OVER LOCAL NETWORK: Crucial resources sharing becomes impossible.  
+i.   FILE TRANSFER OVER LOCAL NETWORK: Crucial resources sharing becomes possible.  
 ii.  FILE TRANSFER OF ANY SIZE: Supports file transfer be it large or small files.  
 iii. FRIENDLY UI: Minimal and simple UI makes it easier for the user.  
 iv.  SHOWS FILE TRANSFER STATUS: Track the progress of file transfer along with speed and time taken.  
