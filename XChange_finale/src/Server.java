@@ -329,13 +329,11 @@ public class Server {
                 Socket socket = server_socket.accept();
 
                 DataInputStream data_input_stream = new DataInputStream(socket.getInputStream());
-
                 int file_name_length = data_input_stream.readInt();
                 if (file_name_length > 0) {
                     byte[] file_name_bytes = new byte[file_name_length];
                     data_input_stream.readFully(file_name_bytes, 0, file_name_bytes.length);
                     String file_name = new String(file_name_bytes);
-
                     int file_content_length = data_input_stream.readInt();
                     if (file_content_length > 0) {
                         byte[] file_content_bytes = new byte[file_content_length];
