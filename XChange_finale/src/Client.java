@@ -192,7 +192,6 @@ public class Client {
                 multicastSocket = new MulticastSocket(BROADCAST_PORT);
                 InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
                 multicastSocket.joinGroup(group);
-
                 int i=1;
                 byte[] buf = new byte[256];
                 while (true) {
@@ -205,10 +204,8 @@ public class Client {
                     }
                     String serverName = new String(packet.getData(), 0, packet.getLength());
                     serverAddress = packet.getAddress().getHostAddress();
-
                     // Skip own server broadcasts and already discovered servers
                     if (!serverAddresses.contains(serverAddress) && !serverAddress.equals(InetAddress.getLocalHost().getHostAddress())) {
-
                         serverAddresses.add(serverAddress);
                         serverListModel.addElement(i + ". " + serverName + " (" + serverAddress + ")");
                         i++;
