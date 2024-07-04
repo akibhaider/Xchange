@@ -114,14 +114,11 @@ public class Sender {
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                     // UIManager.put("FileChooserUI", "javax.swing.plaf.metal.MetalFileChooserUI");
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                         | UnsupportedLookAndFeelException ex) {
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
                     ex.printStackTrace();
                 }
-
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setDialogTitle("Choose a File to Send");
-
                 try {
                     if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                         fileToSend[0] = fileChooser.getSelectedFile();
@@ -133,7 +130,6 @@ public class Sender {
                 }
             }
         });
-
 
         sendButton.addActionListener(new ActionListener() {
             @Override
@@ -169,7 +165,6 @@ public class Sender {
                                 Socket socket = new Socket(ipAdd.get(finalI), 1234);
 
                                 DataOutputStream data_output_stream = new DataOutputStream(socket.getOutputStream());
-
                                 String file_name = fileToSend[0].getName();
                                 byte[] file_name_byte = file_name.getBytes();
 
