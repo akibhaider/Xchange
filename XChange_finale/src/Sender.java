@@ -142,16 +142,13 @@ public class Sender {
                         progress_frame.setSize(400, 150);
                         progress_frame.setLocationRelativeTo(frame);
                         progress_frame.getContentPane().setBackground(new Color(45, 45, 45));
-
                         JProgressBar j_progress_bar = new JProgressBar(0, (int) fileToSend[0].length());
                         j_progress_bar.setStringPainted(true);
                         j_progress_bar.setForeground(new Color(41, 128, 185));
                         j_progress_bar.setBackground(new Color(60, 63, 65));
-
                         JLabel j_l_speed = new JLabel("Speed: 0 B/s", SwingConstants.CENTER);
                         j_l_speed.setFont(new Font("Roboto", Font.PLAIN, 16));
                         j_l_speed.setForeground(new Color(210, 210, 210));
-
                         progress_frame.setLayout(new BoxLayout(progress_frame.getContentPane(), BoxLayout.Y_AXIS));
                         progress_frame.add(j_progress_bar);
                         progress_frame.add(j_l_speed);
@@ -167,7 +164,6 @@ public class Sender {
                                 DataOutputStream data_output_stream = new DataOutputStream(socket.getOutputStream());
                                 String file_name = fileToSend[0].getName();
                                 byte[] file_name_byte = file_name.getBytes();
-
                                 data_output_stream.writeInt(file_name_byte.length);
                                 data_output_stream.write(file_name_byte);
                                 data_output_stream.writeInt((int) fileToSend[0].length());
