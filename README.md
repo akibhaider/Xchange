@@ -32,14 +32,19 @@ vi.  FILE TYPE COMPATIBILITY: Files can be sent of multiple types such as, image
   <em>Main Menu</em>
    <br/>
    <br/>
-  <img src="XChange_finale/source_img/receiver.png" alt="Ship planning-i" width="337"/>
+  <img src="XChange_finale/source_img/XChange_main_menu.jpg" alt="Ship planning-i" width="337"/>
+   <br/>
+  <em>Setup connection between available devices</em>
+   <br/>
+   <br/>
+  <img src="XChange_finale/source_img/receiver.jpg" alt="Ship planning-i" width="337"/>
    <br/>
   <em>File Receiving Window</em>
    <br/>
 </p>
 <p align="center">
    <br/>
-  <img src="XChange_finale/source_img/sender.png" alt="Ship planning-ii" width="337"/>
+  <img src="XChange_finale/source_img/sender.jpg" alt="Ship planning-ii" width="337"/>
    <br/>
   <em>File Sending Window</em>
    <br/>
