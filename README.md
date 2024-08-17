@@ -1,4 +1,5 @@
 # XChange
+![Contributors](https://img.shields.io/github/contributors/akibhaider/XChange?color=darkgreen) ![Forks](https://img.shields.io/github/forks/akibhaider/XChange?style=social) ![Stargazers](https://img.shields.io/github/stars/akibhaider/XChange?style=social) ![Issues](https://img.shields.io/github/issues/akibhaider/XChange?color=brown) 
 
 **Overview** 
 XChange is a Java application that enables secure, fast and user-friendly file transfer between two devices connected on the same local network, eliminating the need for an internet connection.
